@@ -3,7 +3,7 @@ import { Headers, Http } from '@angular/http';
 import { environment } from '../../environments/environment';
 
 @Injectable()
-export class BeverageService {
+export class UserService {
 
     private apiUrl: string;
 
@@ -13,38 +13,40 @@ export class BeverageService {
         this.apiUrl = environment.apiUrl;
     }
 
-    async getBeverages(): Promise<Array<Object>> {
-        const resp = await this.http.get(`${this.apiUrl}/beverage`).toPromise();
-        const beverages = resp.json();
-        return beverages;
-    }
-
-    getBeveragesById(beveragesId): Promise<Object> {
-        return this.http.get(`${this.apiUrl}/beverage/id/${beveragesId}`)
+    getUsers(): Promise<Array<Object>> {
+        return this.http.get(`${this.apiUrl}/user`)
             .toPromise()
             .then((resp) => {
                 return resp.json();
             });
     }
 
-    addBeverages(beverages): Promise<Object> {
-        return this.http.post(`${this.apiUrl}/beverage`, beverages)
+    getUserById(userId): Promise<Object> {
+        return this.http.get(`${this.apiUrl}/user/id/${userId}`)
             .toPromise()
             .then((resp) => {
                 return resp.json();
             });
     }
 
-    deleteBeverages(id): Promise<Object> {
-        return this.http.delete(`${this.apiUrl}/beverage/id/${id}`)
+    addUser(user): Promise<Object> {
+        return this.http.post(`${this.apiUrl}/user`, user)
             .toPromise()
             .then((resp) => {
                 return resp.json();
             });
     }
 
-    updateBeverage(id, beverage): Promise<Object> {
-        return this.http.put(`${this.apiUrl}/beverage/id/${id}`, beverage)
+    deleteUser(id): Promise<Object> {
+        return this.http.delete(`${this.apiUrl}/user/id/${id}`)
+            .toPromise()
+            .then((resp) => {
+                return resp.json();
+            });
+    }
+
+    updateUser(id, user): Promise<Object> {
+        return this.http.put(`${this.apiUrl}/user/id/${id}`, user)
             .toPromise()
             .then((resp) => {
                 return resp.json();
